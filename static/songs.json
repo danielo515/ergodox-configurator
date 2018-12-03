@@ -1,0 +1,46 @@
+{
+  "songs": [
+    {
+      "title": "House",
+      "file": "bensound-house.mp3",
+      "url": "bensound-house.mp3",
+      "artist": "Bensound",
+      "cover": "https://www.bensound.com/bensound-img/house.jpg"
+    },
+    {
+      "title": "Dance",
+      "file": "bensound-dance.mp3",
+      "url": "bensound-dance.mp3",
+      "artist": "Bensound",
+      "cover": "https://www.bensound.com/bensound-img/dance.jpg"
+    },
+    {
+      "title": "Dubstep",
+      "file": "bensound-dubstep.mp3",
+      "url": "bensound-dubstep.mp3",
+      "artist": "Bensound",
+      "cover": "https://www.bensound.com/bensound-img/dubstep.jpg"
+    },
+    {
+      "title": "Dreams",
+      "file": "bensound-dreams.mp3",
+      "url": "bensound-dreams.mp3",
+      "artist": "Bensound",
+      "cover": "https://www.bensound.com/bensound-img/dreams.jpg"
+    },
+    {
+      "title": "Summer",
+      "file": "bensound-summer.mp3",
+      "url": "bensound-summer.mp3",
+      "artist": "Bensound",
+      "cover": "https://www.bensound.com/bensound-img/summer.jpg"
+    },
+    {
+      "title": "Endlessmotion",
+      "file": "bensound-endlessmotion.mp3",
+      "url": "bensound-endlessmotion.mp3",
+      "artist": "Bensound",
+      "cover": "https://www.bensound.com/bensound-img/endlessmotion.jpg"
+    }
+  ]
+}
