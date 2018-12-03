@@ -9,6 +9,7 @@ const Base = styled.div`
   margin: 0;
   text-align: center;
   background-color: grey;
+  border-radius: 8px;
 `;
 
 const Label = styled.div`
@@ -32,7 +33,7 @@ const Cap = styled.div`
   cursor: pointer;
 `;
 
-function Key({ width, height, label, column, row, verticalSpan }) {
+function Key({ width, height, label, column, row, verticalSpan, rotate }) {
   const style = {
     width: `${width}%`,
     height: `${height * verticalSpan}%`,
