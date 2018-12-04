@@ -33,12 +33,12 @@ const Cap = styled.div`
   cursor: pointer;
 `;
 
-function Key({ width, height, label, column, row, verticalSpan, rotate }) {
+function Key({ width, height, label, column, row, verticalSpan, lift }) {
   const style = {
     width: `${width}%`,
     height: `${height * verticalSpan}%`,
     left: `${width * column}%`,
-    top: `${height * row}%`
+    top: `${height * (row - lift)}%`
   };
   return (
     <Base {...{ style }}>
@@ -51,6 +51,10 @@ function Key({ width, height, label, column, row, verticalSpan, rotate }) {
 
 Key.propTypes = {
   label: PropTypes.string
+};
+
+Key.defaultProps = {
+  lift: 0
 };
 
 export default Key;
