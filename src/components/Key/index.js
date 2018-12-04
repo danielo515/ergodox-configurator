@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
@@ -68,4 +68,4 @@ Key.defaultProps = {
   lift: 0
 };
 
-export default Key;
+export default memo(Key);

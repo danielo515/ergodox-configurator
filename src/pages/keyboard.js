@@ -17,12 +17,13 @@ export class KeyboardPage extends Component {
   };
 
   render() {
-    const { editKey, layout } = this.props;
+    const { editKey, layout, keys } = this.props;
     return (
       <Keyboard
         onKeySelect={editKey}
         layout={layout.description}
         split={layout.split}
+        keysData={keys}
       />
     );
   }

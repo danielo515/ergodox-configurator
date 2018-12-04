@@ -50,7 +50,7 @@ export default (state = initialState, { type, payload }) => {
       const { id } = payload;
       return {
         ...state,
-        keys: ((state.keys[id] = "EDITED"), state.keys)
+        keys: { ...state.keys, [id]: { label: "EDITED" } }
       };
 
     default:
