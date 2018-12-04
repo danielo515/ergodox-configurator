@@ -51,7 +51,8 @@ export default (state = initialState, { type, payload }) => {
       const { row, col } = payload;
       return {
         ...state,
-        keys: ((state.keys[(row + 1) * col] = "EDITED"), state.keys)
+        keys: ((state.keys[row * state.layout.rowLn + col] = "EDITED"),
+        state.keys)
       };
 
     default:
