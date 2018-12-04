@@ -33,7 +33,16 @@ const Cap = styled.div`
   cursor: pointer;
 `;
 
-function Key({ width, height, label, column, row, verticalSpan, lift }) {
+function Key({
+  width,
+  height,
+  label,
+  column,
+  row,
+  verticalSpan,
+  lift,
+  onClick
+}) {
   const style = {
     width: `${width}%`,
     height: `${height * verticalSpan}%`,
@@ -42,7 +51,7 @@ function Key({ width, height, label, column, row, verticalSpan, lift }) {
   };
   return (
     <Base {...{ style }}>
-      <Cap>
+      <Cap onClick={_ => onClick({ row, col: column })}>
         <Label>{label}</Label>
       </Cap>
     </Base>
@@ -50,7 +59,8 @@ function Key({ width, height, label, column, row, verticalSpan, lift }) {
 }
 
 Key.propTypes = {
-  label: PropTypes.string
+  label: PropTypes.string,
+  onClick: PropTypes.func.isRequired
 };
 
 Key.defaultProps = {

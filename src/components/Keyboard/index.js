@@ -29,10 +29,11 @@ const keyMapping = {
   )
 };
 
-const makeRow = height => width => row => (keyType, idx) =>
+const makeRow = onClick => height => width => row => (keyType, idx) =>
   keyMapping[keyType]({
     width,
     height,
+    onClick,
     row,
     column: idx,
     idx,
@@ -41,45 +42,22 @@ const makeRow = height => width => row => (keyType, idx) =>
 
 // generate rows with
 // JSON.stringify("x12345x".split("").map(label =>({label, verticalSpan: 1}))).replace('"label"','label').slice(1,-1)
-export default () => {
-  const leftLayout = [
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 2],
-    [1, 1, 1, 1, 1, 1, 0],
-    [1, 1, 1, 1, 1, 1, 2],
-    [0, 1, 1, 1, 1, 1, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 1, 1],
-    [0, 0, 0, 0, 0, 0, 1],
-    [0, 0, 0, 0, 3, 3, 1]
-  ];
-  const rightLayout = [
-    [1, 1, 1, 1, 1, 1, 1],
-    [2, 1, 1, 1, 1, 1, 1],
-    [0, 1, 1, 1, 1, 1, 1],
-    [2, 1, 1, 1, 1, 1, 1],
-    [0, 1, 1, 1, 1, 1, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [1, 1, 0, 0, 0, 0, 0],
-    [1, 0, 0, 0, 0, 0, 0],
-    [1, 3, 3, 0, 0, 0, 0]
-  ];
-
-  const rows = leftLayout.length;
+export default ({ onKeySelect, layout }) => {
+  const rows = layout.left.length;
   const height = 100 / rows;
-  const width = 100 / leftLayout[0].length; // Fixed to first row width
-  const rower = makeRow(height)(width);
+  const width = 100 / layout.left[0].length; // Fixed to first row width
+  const rower = makeRow(onKeySelect)(height)(width);
   return (
     <Layout>
       <KeyboardTable>
         <Row style={{ marginRight: "5%" }}>
-          {leftLayout.map((keys, rowIdx) => {
+          {layout.left.map((keys, rowIdx) => {
             const makeKey = rower(rowIdx);
             return keys.map(makeKey);
           })}
         </Row>
         <Row style={{ marginLeft: "5%" }}>
-          {rightLayout.map((keys, rowIdx) => {
+          {layout.right.map((keys, rowIdx) => {
             const makeKey = rower(rowIdx);
             return keys.map(makeKey);
           })}

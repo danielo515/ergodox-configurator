@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
 import Keyboard from "../components/Keyboard";
+import { actions as keyboardActions } from "../modules/keyboard";
 
 export class KeyboardPage extends Component {
   static propTypes = {
@@ -9,15 +12,17 @@ export class KeyboardPage extends Component {
   };
 
   render() {
-    return <Keyboard />;
+    const { editKey, layout } = this.props;
+    return <Keyboard onKeySelect={editKey} layout={layout} />;
   }
 }
 
 const mapStateToProps = state => ({
-  ...state
+  ...state.keyboard
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(keyboardActions, dispatch);
 
 const KeyboardPageConnected = connect(
   mapStateToProps,
