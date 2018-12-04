@@ -4,12 +4,20 @@ import styled from "styled-components";
 
 const Row = styled.div`
   position: relative;
-  padding-top: 33%;
+  /* padding-top: 33%; */
   flex-grow: 1;
+  height: 100%;
 `;
 
 const KeyboardTable = styled.div`
   display: flex;
+  height: 50%;
+`;
+
+const Layout = styled.div`
+  width: 90%;
+  height: 600px;
+  padding: 5%;
 `;
 
 const makeRow = height => width => row => (keyInfo, idx) =>
@@ -156,7 +164,7 @@ export default () => {
   const width = 100 / keys[0].length; // Fixed to first row width
   const rower = makeRow(height)(width);
   return (
-    <div>
+    <Layout>
       <KeyboardTable>
         <Row>
           {keys.map((row, rowIdx) => {
@@ -185,6 +193,6 @@ export default () => {
           })}
         </Row>
       </KeyboardTable>
-    </div>
+    </Layout>
   );
 };
