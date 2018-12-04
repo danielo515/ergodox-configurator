@@ -41,6 +41,7 @@ function Key({
   row,
   verticalSpan,
   lift,
+  id,
   onClick
 }) {
   const style = {
@@ -51,7 +52,7 @@ function Key({
   };
   return (
     <Base {...{ style }}>
-      <Cap onClick={_ => onClick({ row, col: column })}>
+      <Cap onClick={_ => onClick({ id })}>
         <Label>{label}</Label>
       </Cap>
     </Base>
