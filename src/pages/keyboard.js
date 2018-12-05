@@ -6,10 +6,10 @@ import { bindActionCreators } from "redux";
 import Keyboard from "../components/Keyboard";
 import { actions as keyboardActions } from "../modules/keyboard";
 
-if (process.env.NODE_ENV !== "production") {
-  const { whyDidYouUpdate } = require("why-did-you-update");
-  whyDidYouUpdate(React);
-}
+// if (process.env.NODE_ENV !== "production") {
+//   const { whyDidYouUpdate } = require("why-did-you-update");
+//   whyDidYouUpdate(React);
+// }
 
 export class KeyboardPage extends Component {
   static propTypes = {
@@ -17,14 +17,17 @@ export class KeyboardPage extends Component {
   };
 
   render() {
-    const { editKey, layout, keys } = this.props;
+    const { editKey, layout, keys, exportLayout } = this.props;
     return (
-      <Keyboard
-        onKeySelect={editKey}
-        layout={layout.description}
-        split={layout.split}
-        keysData={keys}
-      />
+      <React.Fragment>
+        <Keyboard
+          onKeySelect={editKey}
+          layout={layout.description}
+          split={layout.split}
+          keysData={keys}
+        />
+        <button onClick={exportLayout}>Export</button>
+      </React.Fragment>
     );
   }
 }
