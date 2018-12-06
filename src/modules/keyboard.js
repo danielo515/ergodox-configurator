@@ -1,6 +1,7 @@
 const prefix = "[keyboard]";
 export const EDIT_KEY = `${prefix} EDIT_KEY`;
 export const EXPORT_LAYOUT = `${prefix} EXPORT_LAYOUT`;
+export const SET_KEY = `${prefix} SET_KEY`;
 
 const editKey = payload => ({
   type: EDIT_KEY,
@@ -10,6 +11,16 @@ const editKey = payload => ({
 const exportLayout = _ => ({
   type: EXPORT_LAYOUT
 });
+const setKey = payload => ({
+  type: SET_KEY,
+  payload
+});
+
+export const actions = {
+  editKey,
+  exportLayout,
+  setKey
+};
 
 const layoutDescription = [
   // Left hand
@@ -41,13 +52,10 @@ const layout = {
 };
 
 const initialState = {
+  editing: false,
+  editingId: null,
   keys: {},
   layout
-};
-
-export const actions = {
-  editKey,
-  exportLayout
 };
 
 const twoToOneDimension = rowLen => (col, row) => col + row * rowLen;
@@ -80,13 +88,20 @@ const generateLayout = (layoutDescription, keysData) => {
   return compiledLayout.join();
 };
 
-export default (state = initialState, { type, payload }) => {
+export default (state = initialState, { type, payload = {} }) => {
+  const { id, keyCode } = payload;
   switch (type) {
-    case EDIT_KEY:
-      const { id } = payload;
+    case SET_KEY:
       return {
         ...state,
-        keys: { ...state.keys, [id]: { label: "EDITED" } }
+        editing: false,
+        keys: { ...state.keys, [id]: { label: keyCode } }
+      };
+    case EDIT_KEY:
+      return {
+        ...state,
+        editing: true,
+        editingId: id
       };
     case EXPORT_LAYOUT:
       console.log(generateLayout(state.layout.description, state.keys));

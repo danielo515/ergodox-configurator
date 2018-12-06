@@ -16,6 +16,8 @@ const Label = styled.div`
   justify-content: center;
   width: 100%;
   text-align: center;
+  font-size: 85%;
+  word-break: break-word;
 `;
 
 const Cap = styled.div`

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import Keyboard from "../components/Keyboard";
+import EditForm from "../components/EditForm";
 import { actions as keyboardActions } from "../modules/keyboard";
 
 // if (process.env.NODE_ENV !== "production") {
@@ -17,7 +18,15 @@ export class KeyboardPage extends Component {
   };
 
   render() {
-    const { editKey, layout, keys, exportLayout } = this.props;
+    const {
+      editKey,
+      layout,
+      keys,
+      exportLayout,
+      editing,
+      editingId,
+      setKey
+    } = this.props;
     return (
       <React.Fragment>
         <Keyboard
@@ -27,6 +36,7 @@ export class KeyboardPage extends Component {
           keysData={keys}
         />
         <button onClick={exportLayout}>Export</button>
+        <EditForm open={editing} onClose={setKey} info={{ id: editingId }} />
       </React.Fragment>
     );
   }
