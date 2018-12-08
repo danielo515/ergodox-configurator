@@ -16,9 +16,9 @@ const KeyboardTable = styled.div`
 `;
 
 const Layout = styled.div`
-  width: 80%;
-  height: 90%;
-  padding: 4% 10%;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
 `;
 
 const keyMapping = {
@@ -51,7 +51,7 @@ const Keyboard = ({ onKeySelect, layout, split, keysData }) => {
   const rows = layout.length;
   const rowsPerSide = rows / 2; // Just in case of split keyboard
   const rowLn = layout[0].length; // Fixed to first row width
-  const height = 100 / rows;
+  const height = split ? 100 / (rows / 2) : 100 / rows;
   const width = 100 / rowLn;
   const rower = makeRow(onKeySelect)(keysData)(height)(width)(
     rowLn,

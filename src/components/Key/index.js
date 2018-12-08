@@ -4,20 +4,12 @@ import styled, { css } from "styled-components";
 
 const Base = styled.div`
   position: absolute;
-  border: 1px solid blue;
+  border: 1px solid rgb(199, 199, 199);
   padding: 0;
   margin: 0;
   text-align: center;
-  background-color: grey;
+  background-color: rgb(244, 244, 244);
   border-radius: 8px;
-`;
-
-const Label = styled.div`
-  justify-content: center;
-  width: 100%;
-  text-align: center;
-  font-size: 85%;
-  word-break: break-word;
 `;
 
 const fontSize = css`
