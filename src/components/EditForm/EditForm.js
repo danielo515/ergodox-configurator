@@ -14,7 +14,11 @@ import { withStyles } from "@material-ui/core/styles";
 const styles = theme => ({
   paper: {
     minWidth: "30%",
-    minHeight: "30%"
+    minHeight: "30%",
+    overflowY: "visible"
+  },
+  DialogContent: {
+    overflowY: "visible"
   }
 });
 
@@ -52,19 +56,15 @@ class EditForm extends PureComponent {
         open={open}
         onClose={this.onsSubmit}
         aria-labelledby="edit-key"
-        classes={classes}
+        classes={{ paper: classes.paper }}
       >
-        <DialogContent>
+        <DialogContent classes={{ root: classes.DialogContent }}>
           <DialogContentText>Keycode:</DialogContentText>
-          {/* <TextField
-            autoFocus
-            margin="dense"
-            id="keycode"
-            label="Keycode"
-            fullWidth
+          <Select
+            options={keyOptions}
             onChange={this.onChange}
-          /> */}
-          <Select options={keyOptions} onChange={this.onChange} />
+            openMenuOnFocus
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={this.onsSubmit} color="primary">
