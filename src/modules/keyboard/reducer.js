@@ -83,9 +83,9 @@ const generateLayout = (layoutDescription, keysData) => {
   const compiledLayout = flatMap((row, rowIdx) =>
     flatMap((keyType, col) =>
       keyType !== 0 ? getKey(translate(col, rowIdx)).value : ""
-    )(row)
+    )(row).join()
   )(layoutDescription);
-  return compiledLayout.join();
+  return compiledLayout.join(", \n");
 };
 
 export default (state = initialState, { type, payload = {} }) => {
