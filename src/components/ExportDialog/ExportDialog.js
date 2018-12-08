@@ -1,15 +1,15 @@
 import React, { PureComponent } from "react";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Snackbar from "@material-ui/core/Snackbar";
+
 import PropTypes from "prop-types";
 
 import { withStyles } from "@material-ui/core/styles";
-import { grey } from "ansi-colors";
 
 const styles = theme => ({
   paper: {
@@ -51,7 +51,25 @@ class ExportDialog extends PureComponent {
     onCopySuccess: PropTypes.func
   };
 
+  state = {
+    snackOpen: false,
+    snackMessage: ""
+  };
+
   textArea = React.createRef();
+
+  onSnackClose() {
+    this.setState({ snackOpen: false });
+  }
+
+  onSnackClose = this.onSnackClose.bind(this);
+
+  openSnack(message) {
+    this.setState({
+      snackOpen: true,
+      snackMessage: message
+    });
+  }
 
   onEnter = () => {
     const textArea = this.textArea.current;
@@ -63,6 +81,7 @@ class ExportDialog extends PureComponent {
       console.error("Error copying to the clipboard");
     }
     this.props.onCopySuccess("Copied to the clipboard");
+    this.openSnack("Copied to the clipboard!");
   };
 
   render() {
@@ -91,6 +110,19 @@ class ExportDialog extends PureComponent {
           ref={this.textArea}
           value={text}
           readOnly
+        />
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "center"
+          }}
+          open={this.state.snackOpen}
+          autoHideDuration={6000}
+          onClose={this.onSnackClose}
+          ContentProps={{
+            "aria-describedby": "message-id"
+          }}
+          message={<span id="message-id">{this.state.snackMessage}</span>}
         />
       </Dialog>
     );
