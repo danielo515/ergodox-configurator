@@ -6,15 +6,15 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Select from "react-select";
 import PropTypes from "prop-types";
 
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
+  paper: {
+    minWidth: "30%",
+    minHeight: "30%"
   }
 });
 
@@ -40,25 +40,31 @@ class EditForm extends PureComponent {
   }
 
   onsSubmit() {
-    this.props.onClose({ keyCode: this.state.keyCode, ...this.props.info });
+    this.props.onClose({ key: this.state.key, ...this.props.info });
   }
-  onChange({ target: { value } }) {
-    this.setState({ keyCode: value });
+  onChange(key) {
+    this.setState({ key });
   }
   render() {
-    const { open } = this.props;
+    const { open, keyOptions, classes } = this.props;
     return (
-      <Dialog open={open} onClose={this.onsSubmit} aria-labelledby="edit-key">
+      <Dialog
+        open={open}
+        onClose={this.onsSubmit}
+        aria-labelledby="edit-key"
+        classes={classes}
+      >
         <DialogContent>
           <DialogContentText>Keycode:</DialogContentText>
-          <TextField
+          {/* <TextField
             autoFocus
             margin="dense"
             id="keycode"
             label="Keycode"
             fullWidth
             onChange={this.onChange}
-          />
+          /> */}
+          <Select options={keyOptions} onChange={this.onChange} />
         </DialogContent>
         <DialogActions>
           <Button onClick={this.onsSubmit} color="primary">

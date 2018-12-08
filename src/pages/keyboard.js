@@ -6,6 +6,7 @@ import { bindActionCreators } from "redux";
 import Keyboard from "../components/Keyboard";
 import EditForm from "../components/EditForm";
 import { actions as keyboardActions } from "../modules/keyboard/reducer";
+import { selectKeyOptions } from "../modules/keyboard/keyDefinitions";
 
 // if (process.env.NODE_ENV !== "production") {
 //   const { whyDidYouUpdate } = require("why-did-you-update");
@@ -36,7 +37,12 @@ export class KeyboardPage extends Component {
           keysData={keys}
         />
         <button onClick={exportLayout}>Export</button>
-        <EditForm open={editing} onClose={setKey} info={{ id: editingId }} />
+        <EditForm
+          open={editing}
+          onClose={setKey}
+          info={{ id: editingId }}
+          keyOptions={selectKeyOptions}
+        />
       </React.Fragment>
     );
   }

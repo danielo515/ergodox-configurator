@@ -4,7 +4,7 @@ import {
   otherLayers,
   dualFunctionLabel,
   shortcutsLabel
-} from "../state/utils/macroParams";
+} from "./macroParams";
 
 export const aliases = {
   KC_LCTL: "KC_LCTRL",
@@ -1123,6 +1123,7 @@ function getOption(keyCode, os) {
 
 Object.keys(keyCategories).forEach(categoryKey => {
   const categoryName = keyCategories[categoryKey];
+  // Iterate all keyCodes and keep only those KEYCODES (string) whose category matches
   const categoryKeys = Object.keys(keyCodes).filter(
     keyCode => keyCodes[keyCode].category === categoryKey
   );

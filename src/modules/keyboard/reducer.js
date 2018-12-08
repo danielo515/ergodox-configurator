@@ -79,23 +79,23 @@ const flatMap = fn => arr =>
  */
 const generateLayout = (layoutDescription, keysData) => {
   const translate = twoToOneDimension(layoutDescription[0].length);
-  const getKey = getOr(keysData, { label: "KC_TRANSPARENT" });
+  const getKey = getOr(keysData, { value: "KC_TRANSPARENT" });
   const compiledLayout = flatMap((row, rowIdx) =>
     flatMap((keyType, col) =>
-      keyType !== 0 ? getKey(translate(col, rowIdx)).label : ""
+      keyType !== 0 ? getKey(translate(col, rowIdx)).value : ""
     )(row)
   )(layoutDescription);
   return compiledLayout.join();
 };
 
 export default (state = initialState, { type, payload = {} }) => {
-  const { id, keyCode } = payload;
+  const { id, key } = payload;
   switch (type) {
     case SET_KEY:
       return {
         ...state,
         editing: false,
-        keys: { ...state.keys, [id]: { label: keyCode } }
+        keys: { ...state.keys, [id]: key }
       };
     case EDIT_KEY:
       return {
