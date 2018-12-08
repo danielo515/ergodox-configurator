@@ -20,6 +20,15 @@ const styles = theme => ({
   DialogContent: {
     width: "100%"
   },
+  textArea: {
+    width: "1em",
+    height: "1em",
+    backgroundColor: "tranpsarent",
+    position: "fixed",
+    top: "-1em",
+    left: "-1em",
+    display: "hidden"
+  },
   codeWrapper: {
     backgroundColor: "rgb(244, 244, 244)",
     border: "1px solid grey",
@@ -29,19 +38,31 @@ const styles = theme => ({
 });
 
 class ExportDialog extends PureComponent {
-  state = {
-    keyCode: "KC_TRANSPARENT"
-  };
-
   static defaultProps = {
     open: false,
-    info: {}
+    info: {},
+    onCopySuccess: (...args) => console.log(args)
   };
 
   static propTypes = {
     open: PropTypes.bool,
     text: PropTypes.string,
-    close: PropTypes.func
+    close: PropTypes.func,
+    onCopySuccess: PropTypes.func
+  };
+
+  textArea = React.createRef();
+
+  onEnter = () => {
+    const textArea = this.textArea.current;
+    try {
+      textArea.focus();
+      textArea.select();
+      document.execCommand("copy");
+    } catch (err) {
+      console.error("Error copying to the clipboard");
+    }
+    this.props.onCopySuccess("Copied to the clipboard");
   };
 
   render() {
@@ -50,6 +71,7 @@ class ExportDialog extends PureComponent {
       <Dialog
         open={open}
         onClose={close}
+        onEntered={this.onEnter}
         aria-labelledby="edit-key"
         classes={{ paper: classes.paper }}
       >
@@ -64,6 +86,12 @@ class ExportDialog extends PureComponent {
             CLOSE
           </Button>
         </DialogActions>
+        <textarea
+          className={classes.textArea}
+          ref={this.textArea}
+          value={text}
+          readOnly
+        />
       </Dialog>
     );
   }
