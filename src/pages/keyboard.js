@@ -8,6 +8,7 @@ import Actions from "../components/Keyboard/Actions";
 import Layout from "../components/Keyboard/Layout";
 import EditForm from "../components/EditForm";
 import ExportDialog from "../components/ExportDialog";
+import Tabs from "../components/Tabs";
 
 import { actions as keyboardActions } from "../modules/keyboard/reducer";
 import { selectKeyOptions } from "../modules/keyboard/keyDefinitions";
@@ -45,18 +46,18 @@ export class KeyboardPage extends Component {
     return (
       <Fragment>
         <Layout
-          top={
-            <Keyboard
-              onKeySelect={editKey}
-              layout={layout.description}
-              split={layout.split}
-              keysData={keys}
-            />
-          }
+          top={<Tabs />}
           bottom={
             <Actions actions={[{ method: exportLayout, label: "Export" }]} />
           }
-        />
+        >
+          <Keyboard
+            onKeySelect={editKey}
+            layout={layout.description}
+            split={layout.split}
+            keysData={keys}
+          />
+        </Layout>
         <EditForm
           open={editing}
           onClose={setKey}
