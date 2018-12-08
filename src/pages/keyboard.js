@@ -7,6 +7,8 @@ import Keyboard from "../components/Keyboard";
 import Actions from "../components/Keyboard/Actions";
 import Layout from "../components/Keyboard/Layout";
 import EditForm from "../components/EditForm";
+import ExportDialog from "../components/ExportDialog";
+
 import { actions as keyboardActions } from "../modules/keyboard/reducer";
 import { selectKeyOptions } from "../modules/keyboard/keyDefinitions";
 
@@ -14,6 +16,13 @@ import { selectKeyOptions } from "../modules/keyboard/keyDefinitions";
 //   const { whyDidYouUpdate } = require("why-did-you-update");
 //   whyDidYouUpdate(React);
 // }
+
+const mapStateToProps = state => ({
+  ...state.keyboard
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(keyboardActions, dispatch);
 
 export class KeyboardPage extends Component {
   static propTypes = {
@@ -28,6 +37,9 @@ export class KeyboardPage extends Component {
       exportLayout,
       editing,
       editingId,
+      exportIsOpen,
+      closeExport,
+      exported,
       setKey
     } = this.props;
     return (
@@ -51,17 +63,11 @@ export class KeyboardPage extends Component {
           info={{ id: editingId }}
           keyOptions={selectKeyOptions}
         />
+        <ExportDialog open={exportIsOpen} close={closeExport} text={exported} />
       </Fragment>
     );
   }
 }
-
-const mapStateToProps = state => ({
-  ...state.keyboard
-});
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(keyboardActions, dispatch);
 
 const KeyboardPageConnected = connect(
   mapStateToProps,

@@ -1,6 +1,7 @@
 const prefix = "[keyboard]";
 export const EDIT_KEY = `${prefix} EDIT_KEY`;
 export const EXPORT_LAYOUT = `${prefix} EXPORT_LAYOUT`;
+export const EXPORT_CLOSE = `${prefix} EXPORT_CLOSE`;
 export const SET_KEY = `${prefix} SET_KEY`;
 
 const editKey = payload => ({
@@ -16,9 +17,14 @@ const setKey = payload => ({
   payload
 });
 
+const closeExport = _ => ({
+  type: EXPORT_CLOSE
+});
+
 export const actions = {
   editKey,
   exportLayout,
+  closeExport,
   setKey
 };
 
@@ -54,6 +60,8 @@ const layout = {
 const initialState = {
   editing: false,
   editingId: null,
+  exportIsOpen: false,
+  exported: "",
   keys: {},
   layout
 };
@@ -104,8 +112,16 @@ export default (state = initialState, { type, payload = {} }) => {
         editingId: id
       };
     case EXPORT_LAYOUT:
-      console.log(generateLayout(state.layout.description, state.keys));
-      return state;
+      return {
+        ...state,
+        exported: generateLayout(state.layout.description, state.keys),
+        exportIsOpen: true
+      };
+    case EXPORT_CLOSE:
+      return {
+        ...state,
+        exportIsOpen: false
+      };
 
     default:
       return state;
