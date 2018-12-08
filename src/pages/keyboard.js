@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 
 import Keyboard from "../components/Keyboard";
 import EditForm from "../components/EditForm";
-import { actions as keyboardActions } from "../modules/keyboard";
+import { actions as keyboardActions } from "../modules/keyboard/reducer";
 
 // if (process.env.NODE_ENV !== "production") {
 //   const { whyDidYouUpdate } = require("why-did-you-update");

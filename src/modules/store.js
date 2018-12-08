@@ -1,5 +1,5 @@
 import { createStore as createReduxStore } from "redux";
-import keyboard from "./keyboard";
+import keyboard from "./keyboard/reducer";
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({

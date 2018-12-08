@@ -46,13 +46,9 @@ class EditForm extends PureComponent {
     this.setState({ keyCode: value });
   }
   render() {
-    const { open, onClose } = this.props;
+    const { open } = this.props;
     return (
-      <Dialog
-        open={open}
-        onClose={this.onsSubmit}
-        aria-labelledby="form-dialog-title"
-      >
+      <Dialog open={open} onClose={this.onsSubmit} aria-labelledby="edit-key">
         <DialogContent>
           <DialogContentText>Keycode:</DialogContentText>
           <TextField
@@ -66,10 +62,7 @@ class EditForm extends PureComponent {
         </DialogContent>
         <DialogActions>
           <Button onClick={this.onsSubmit} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={this.onsSubmit} color="primary">
-            Subscribe
+            Save
           </Button>
         </DialogActions>
       </Dialog>
