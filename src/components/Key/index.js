@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const Base = styled.div`
   position: absolute;
@@ -18,6 +18,22 @@ const Label = styled.div`
   text-align: center;
   font-size: 85%;
   word-break: break-word;
+`;
+
+const fontSize = css`
+  ${({ label }) => {
+    if (label.length === 1) return "125%";
+    if (label.length > 5) return "65%";
+    return "85%";
+  }};
+`;
+
+const LabelEntry = styled.div`
+  font-size: ${fontSize};
+  word-break: break-word;
+  &:nth-child(2) {
+    margin-top: 2px;
+  }
 `;
 
 const Cap = styled.div`
@@ -55,7 +71,7 @@ function Key({
   return (
     <Base {...{ style }}>
       <Cap onClick={_ => onClick({ id })}>
-        <Label>{label}</Label>
+        <LabelEntry label={label}>{label}</LabelEntry>
       </Cap>
     </Base>
   );
