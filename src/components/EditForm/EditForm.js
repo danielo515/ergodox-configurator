@@ -10,16 +10,15 @@ import PropTypes from "prop-types";
 
 import { withStyles } from "@material-ui/core/styles";
 
-const styles = theme => ({
+const styles = {
   paper: {
     minWidth: "30%",
-    minHeight: "30%",
     overflowY: "visible"
   },
   DialogContent: {
     overflowY: "visible"
   }
-});
+};
 
 class EditForm extends PureComponent {
   state = {
@@ -59,11 +58,7 @@ class EditForm extends PureComponent {
       >
         <DialogContent classes={{ root: classes.DialogContent }}>
           <DialogContentText>Keycode:</DialogContentText>
-          <Select
-            options={keyOptions}
-            onChange={this.onChange}
-            openMenuOnFocus
-          />
+          <Select options={keyOptions} onChange={this.onChange} autoFocus />
         </DialogContent>
         <DialogActions>
           <Button onClick={this.onsSubmit} color="primary">
