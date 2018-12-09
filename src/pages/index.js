@@ -1,91 +1,78 @@
-import React, { Component } from "react";
-import Player from "../components/Player/Player";
-import TwoCol from "../components/TwoCol";
-// import { bindActionCreators } from 'redux';
-// import { connect } from 'react-redux';
-// import { actionCreators as playerActions } from '../modules/player';
-// import { actionCreators as listActions } from '../modules/playList';
-// import { actionCreators as apiActions } from '../modules/api';
-import { MobilePlaylist } from "../components/PlayList";
-import withRoot from "../withRoot";
+import React, { Component, Fragment } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-// MOCKUP
-import { songs } from "../../static/songs.json";
+import Keyboard from "../components/Keyboard";
+import Actions from "../components/Keyboard/Actions";
+import Layout from "../components/Keyboard/Layout";
+import EditForm from "../components/EditForm";
+import ExportDialog from "../components/ExportDialog";
+import Tabs from "../components/Tabs";
 
-const cl = console.log;
+import { actions as keyboardActions } from "../modules/keyboard/reducer";
+import { selectKeyOptions } from "../modules/keyboard/keyDefinitions";
 
-// const mapStateToProps = ({ player, playList, api }) => ({
-//   playing: player.playing,
-//   cover: player.cover,
-//   current: playList.current, // TODO: make this a selected prop derived from current idx
-//   api,
-//   playList,
-// });
+// if (process.env.NODE_ENV !== "production") {
+//   const { whyDidYouUpdate } = require("why-did-you-update");
+//   whyDidYouUpdate(React);
+// }
 
-// const mapDispatchToProps = dispatch =>
-//   bindActionCreators(
-//     { ...playerActions, ...listActions, ...apiActions },
-//     dispatch
-//   );
+const mapStateToProps = state => ({
+  ...state.keyboard
+});
 
-class Index extends Component {
-  //   componentDidMount() {
-  //     this.props.fetchSongs();
-  //   }
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(keyboardActions, dispatch);
 
-  //   //WARNING! To be deprecated in React v17. Use new lifecycle static getDerivedStateFromProps instead.
-  //   componentWillReceiveProps(nextProps) {
-  //     if (nextProps.current.id !== this.props.current.id) {
-  //       this.props.getCoverUrl(nextProps.current.id);
-  //     }
-  //   }
+export class KeyboardPage extends Component {
+  static propTypes = {
+    prop: PropTypes.string
+  };
 
   render() {
-    const props = {
-      playList: { current: songs[0] },
-      next: cl,
-      previous: cl,
-      cover: "https://picsum.photos/200/300"
-    };
-    const { playList } = props;
+    const {
+      editKey,
+      layout,
+      keys,
+      exportLayout,
+      editing,
+      editingId,
+      exportIsOpen,
+      closeExport,
+      exported,
+      setKey
+    } = this.props;
     return (
-      <TwoCol
-        left={
-          <Player
-            song={playList.current}
-            next={props.next}
-            previous={props.previous}
-            cover={props.cover}
+      <Fragment>
+        <Layout
+          top={<Tabs />}
+          bottom={
+            <Actions actions={[{ method: exportLayout, label: "Export" }]} />
+          }
+        >
+          <Keyboard
+            onKeySelect={editKey}
+            layout={layout.description}
+            split={layout.split}
+            keysData={keys}
           />
-        }
-        right={
-          <MobilePlaylist
-            like={console.log}
-            onSortChange={console.log}
-            onSelect={console.log}
-            footer={{
-              nextPage: cl,
-              prevPage: cl,
-              page: 3,
-              pages: 12
-            }}
-            dislike={cl}
-            // Static props
-            sortBy="artist"
-            data={songs}
-            favorites={[]}
-            selected={"rabo"}
-            loading={false}
-          />
-        }
-      />
+        </Layout>
+        <EditForm
+          open={editing}
+          onClose={setKey}
+          info={{ id: editingId }}
+          keyOptions={selectKeyOptions}
+        />
+        <ExportDialog open={exportIsOpen} close={closeExport} text={exported} />
+      </Fragment>
     );
   }
 }
 
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(MediaPlayer);
+const KeyboardPageConnected = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(KeyboardPage);
 
-export default withRoot(Index);
+export default () => <KeyboardPageConnected />;
