@@ -26,20 +26,20 @@ workbox.clientsClaim();
  */
 self.__precacheManifest = [
   {
-    "url": "webpack-runtime-28d38093bf53b72f55c1.js"
+    "url": "webpack-runtime-9650ed475567882b93ef.js"
   },
   {
     "url": "app.957754330e69326986b1.css"
   },
   {
-    "url": "app-4d88141d917e20263772.js"
+    "url": "app-917aceb3becd0d8dc210.js"
   },
   {
     "url": "component---node-modules-gatsby-plugin-offline-app-shell-js-9d21fcb9571e072e4616.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "a1e4a6e34a6996f510db327cbb50a43c"
+    "revision": "0e88a3fa92ff129e43a65a2d54eb4143"
   },
   {
     "url": "static/d/520/path---offline-plugin-app-shell-fallback-a-30-c5a-NZuapzHg3X9TaN1iIixfv1W23E.json",
@@ -78,7 +78,7 @@ var navigationRoute = new workbox.routing.NavigationRoute(function (_ref) {
 
     // Respond with the offline shell if we match the custom whitelist
     if (customWhitelist.includes(pathname)) {
-      var offlineShell = "/offline-plugin-app-shell-fallback/index.html";
+      var offlineShell = "/ergodox-configurator/offline-plugin-app-shell-fallback/index.html";
       var cacheName = workbox.core.cacheNames.precache;
       return caches.match(offlineShell, {
         cacheName: cacheName
@@ -153,7 +153,7 @@ var messageApi = {
           includesPrefix = _ref3.includesPrefix;
 
       if (!includesPrefix) {
-        return "" + pathname;
+        return "/ergodox-configurator" + pathname;
       } else {
         return pathname;
       }
