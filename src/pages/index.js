@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import Helmet from "react-helmet";
 
 import Keyboard from "../components/Keyboard";
 import Actions from "../components/Keyboard/Actions";
@@ -45,6 +46,12 @@ export class KeyboardPage extends Component {
     } = this.props;
     return (
       <Fragment>
+        <Helmet>
+          {/* General tags */}
+          <title>Ergodox layout editor</title>
+          <meta name="description" content="Configure your ergodox layouts" />
+          <html lang="en" />
+        </Helmet>
         <Layout
           top={<Tabs />}
           bottom={
