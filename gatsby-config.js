@@ -1,9 +1,16 @@
 module.exports = {
+  pathPrefix: "/ergodox-configurator",
   siteMetadata: {
     title: "Eregodox Config"
   },
   plugins: [
     `gatsby-plugin-styled-components`,
+    {
+      resolve: `@wapps/gatsby-plugin-material-ui`,
+      options: {
+        // Add any options here
+      }
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -16,6 +23,13 @@ module.exports = {
         start_url: "."
       }
     },
-    "gatsby-plugin-offline"
+    "gatsby-plugin-offline",
+    {
+      resolve: "gatsby-plugin-webpack-bundle-analyzer",
+      options: {
+        analyzerPort: 4000,
+        production: false
+      }
+    }
   ]
 };
