@@ -102,19 +102,10 @@ export default (state = initialState, { type, payload = {} }) => {
   const { id, key, params } = payload;
   switch (type) {
     case SET_KEY:
-      const keyMeta = keyCodes[key.value];
-      const label =
-        typeof keyMeta.label === "function"
-          ? keyMeta.label({
-              code: key.value,
-              command: params.value,
-              os: key.os || params.os
-            })
-          : key.label;
       return {
         ...state,
         editing: false,
-        keys: { ...state.keys, [id]: { ...key, label } }
+        keys: { ...state.keys, [id]: key }
       };
     case EDIT_KEY:
       return {

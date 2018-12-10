@@ -7,20 +7,18 @@ import Helmet from "react-helmet";
 import Keyboard from "../components/Keyboard";
 import Actions from "../components/Keyboard/Actions";
 import Layout from "../components/Keyboard/Layout";
-import EditForm from "../components/EditForm";
+import editKey from "../components/EditForm";
 import ExportDialog from "../components/ExportDialog";
 import Tabs from "../components/Tabs";
 
 import { actions as keyboardActions } from "../modules/keyboard/reducer";
 import {
   selectKeyOptions,
-  selectModifierOptions
+  selectModifierOptions,
+  keyCodes
 } from "../modules/keyboard/keyDefinitions";
 
-// if (process.env.NODE_ENV !== "production") {
-//   const { whyDidYouUpdate } = require("why-did-you-update");
-//   whyDidYouUpdate(React);
-// }
+const EditForm = editKey(keyCodes);
 
 const mapStateToProps = state => ({
   ...state.keyboard
