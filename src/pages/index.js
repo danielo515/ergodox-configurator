@@ -50,6 +50,8 @@ export class KeyboardPage extends Component {
           {/* General tags */}
           <title>Ergodox layout editor</title>
           <meta name="description" content="Configure your ergodox layouts" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+
           <html lang="en" />
         </Helmet>
         <Layout

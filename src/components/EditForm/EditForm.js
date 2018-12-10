@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
 import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+// import Dialog from "@material-ui/core/Dialog";
+// import DialogActions from "@material-ui/core/DialogActions";
+// import DialogContent from "@material-ui/core/DialogContent";
+// import DialogContentText from "@material-ui/core/DialogContentText";
+import Dialog from "../Dialog";
 import Select from "react-select";
 import PropTypes from "prop-types";
 
@@ -53,18 +53,15 @@ class EditForm extends PureComponent {
       <Dialog
         open={open}
         onClose={this.onsSubmit}
-        aria-labelledby="edit-key"
-        classes={{ paper: classes.paper }}
-      >
-        <DialogContent classes={{ root: classes.DialogContent }}>
-          <DialogContentText>Keycode:</DialogContentText>
-          <Select options={keyOptions} onChange={this.onChange} autoFocus />
-        </DialogContent>
-        <DialogActions>
+        classes={classes}
+        text={"Keycode:"}
+        actions={
           <Button onClick={this.onsSubmit} color="primary">
             Save
           </Button>
-        </DialogActions>
+        }
+      >
+        <Select options={keyOptions} onChange={this.onChange} autoFocus />
       </Dialog>
     );
   }
