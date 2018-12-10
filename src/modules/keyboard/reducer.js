@@ -1,3 +1,5 @@
+import { keyCodes } from "./keyDefinitions";
+
 const prefix = "[keyboard]";
 export const EDIT_KEY = `${prefix} EDIT_KEY`;
 export const EXPORT_LAYOUT = `${prefix} EXPORT_LAYOUT`;
@@ -97,13 +99,22 @@ const generateLayout = (layoutDescription, keysData) => {
 };
 
 export default (state = initialState, { type, payload = {} }) => {
-  const { id, key } = payload;
+  const { id, key, params } = payload;
   switch (type) {
     case SET_KEY:
+      const keyMeta = keyCodes[key.value];
+      const label =
+        typeof keyMeta.label === "function"
+          ? keyMeta.label({
+              code: key.value,
+              command: params.value,
+              os: key.os || params.os
+            })
+          : key.label;
       return {
         ...state,
         editing: false,
-        keys: { ...state.keys, [id]: key }
+        keys: { ...state.keys, [id]: { ...key, label } }
       };
     case EDIT_KEY:
       return {

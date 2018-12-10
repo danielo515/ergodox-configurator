@@ -22,7 +22,8 @@ const styles = {
 
 class EditForm extends PureComponent {
   state = {
-    keyCode: "KC_TRANSPARENT"
+    key: {},
+    params: {}
   };
 
   static defaultProps = {
@@ -32,7 +33,8 @@ class EditForm extends PureComponent {
 
   static propTypes = {
     open: PropTypes.bool,
-    info: PropTypes.object
+    info: PropTypes.object,
+    modifierOptions: PropTypes.arrayOf(PropTypes.object).isRequired
   };
 
   constructor(props) {
@@ -41,14 +43,29 @@ class EditForm extends PureComponent {
     this.onChange = this.onChange.bind(this);
   }
 
+  resetState() {
+    this.setState({ key: {}, params: {} });
+  }
   onsSubmit() {
-    this.props.onClose({ key: this.state.key, ...this.props.info });
+    this.props.onClose({
+      key: this.state.key,
+      ...this.props.info,
+      params: this.state.params
+    });
+    this.resetState();
   }
   onChange(key) {
     this.setState({ key });
   }
+  onParamsChange = this.onParamsChange.bind(this);
+  onParamsChange(params) {
+    this.setState({ params });
+  }
   render() {
-    const { open, keyOptions, classes } = this.props;
+    const { open, keyOptions, classes, modifierOptions } = this.props;
+    const {
+      key: { category }
+    } = this.state;
     return (
       <Dialog
         open={open}
@@ -62,6 +79,13 @@ class EditForm extends PureComponent {
         }
       >
         <Select options={keyOptions} onChange={this.onChange} autoFocus />
+        {category === "modifier" && (
+          <Select
+            options={modifierOptions}
+            onChange={this.onParamsChange}
+            autoFocus
+          />
+        )}
       </Dialog>
     );
   }

@@ -12,7 +12,10 @@ import ExportDialog from "../components/ExportDialog";
 import Tabs from "../components/Tabs";
 
 import { actions as keyboardActions } from "../modules/keyboard/reducer";
-import { selectKeyOptions } from "../modules/keyboard/keyDefinitions";
+import {
+  selectKeyOptions,
+  selectModifierOptions
+} from "../modules/keyboard/keyDefinitions";
 
 // if (process.env.NODE_ENV !== "production") {
 //   const { whyDidYouUpdate } = require("why-did-you-update");
@@ -72,6 +75,7 @@ export class KeyboardPage extends Component {
           onClose={setKey}
           info={{ id: editingId }}
           keyOptions={selectKeyOptions}
+          modifierOptions={selectModifierOptions}
         />
         <ExportDialog open={exportIsOpen} close={closeExport} text={exported} />
       </Fragment>
