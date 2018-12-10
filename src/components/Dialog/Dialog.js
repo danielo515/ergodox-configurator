@@ -12,7 +12,6 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = {
   paper: {
-    minWidth: "50%",
     maxWidth: "70%"
   },
   DialogContent: {
