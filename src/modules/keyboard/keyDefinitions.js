@@ -40,6 +40,7 @@ export const keyCategories = {
 
 /* eslint-disable no-use-before-define */
 export const keyCodes = {
+  /** Alphanumeric **/
   KC_0: { label: "0", jsCode: "Digit0", category: "digit" },
   KC_1: { label: "1", jsCode: "Digit1", category: "digit" },
   KC_2: { label: "2", jsCode: "Digit2", category: "digit" },
@@ -76,6 +77,7 @@ export const keyCodes = {
   KC_X: { label: "X", jsCode: "KeyX", category: "letters" },
   KC_Y: { label: "Y", jsCode: "KeyY", category: "letters" },
   KC_Z: { label: "Z", jsCode: "KeyZ", category: "letters" },
+  /** AuthoShift **/
   KC_ASDN: {
     label: "Autoshift timeout down",
     description: "Lower the Auto Shift timeout variable (down)",
