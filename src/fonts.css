@@ -1,0 +1,154 @@
+@font-face {
+  font-family: oryx;
+  src: url(/fonts/oryx.ttf?lzoc52) format("truetype"),
+    url(/fonts/oryx.woff?lzoc52) format("woff"),
+    url(/fonts/oryx.svg?lzoc52#oryx) format("svg");
+  font-weight: 400;
+  font-style: normal;
+}
+[class*=" icon-"],
+[class^="icon-"] {
+  font-family: oryx !important;
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  -webkit-font-feature-settings: normal;
+  font-feature-settings: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-small {
+  font-size: 0.6em;
+}
+.zoomed {
+  font-size: 1.8em;
+}
+.bolded {
+  font-weight: 700;
+}
+.icon-help:before {
+  content: "\E900";
+}
+.icon-mail:before {
+  content: "\E901";
+}
+.icon-youtube:before {
+  content: "\E902";
+}
+.icon-linux:before {
+  content: "\E903";
+}
+.icon-windows:before {
+  content: "\E904";
+}
+.icon-apple:before {
+  content: "\E905";
+}
+.icon-forward:before {
+  content: "\E906";
+}
+.icon-fast-forward:before {
+  content: "\E907";
+}
+.icon-step-forward:before {
+  content: "\E908";
+}
+.icon-backward:before {
+  content: "\E909";
+}
+.icon-step-backward:before {
+  content: "\E90A";
+}
+.icon-fast-backward:before {
+  content: "\E90B";
+}
+.icon-eject:before {
+  content: "\E90C";
+}
+.icon-toggle-on:before {
+  content: "\E90D";
+}
+.icon-pause-circle-o:before {
+  content: "\E90E";
+}
+.icon-list-alt:before {
+  content: "\E90F";
+}
+.icon-brightness-down:before {
+  content: "\E910";
+}
+.icon-brightness-up:before {
+  content: "\E911";
+}
+.icon-volume-down:before {
+  content: "\E912";
+}
+.icon-volume-off:before {
+  content: "\E913";
+}
+.icon-volume-up:before {
+  content: "\E914";
+}
+.icon-color-palette:before {
+  content: "\E915";
+}
+.icon-air:before {
+  content: "\E916";
+}
+.icon-command:before {
+  content: "\E917";
+}
+.icon-backspace-outline:before {
+  content: "\E918";
+}
+.icon-stop:before {
+  content: "\E919";
+}
+.icon-play:before {
+  content: "\E91A";
+}
+.icon-pause:before {
+  content: "\E91B";
+}
+.icon-mouse-up:before {
+  content: "\E91C";
+}
+.icon-mouse-down:before {
+  content: "\E91D";
+}
+.icon-mouse-left:before {
+  content: "\E91E";
+}
+.icon-mouse-right:before {
+  content: "\E91F";
+}
+.icon-left-click:before {
+  content: "\E920";
+}
+.icon-middle-click:before {
+  content: "\E921";
+}
+.icon-right-click:before {
+  content: "\E922";
+}
+.icon-hui:before {
+  content: "\E923";
+}
+.icon-hud:before {
+  content: "\E924";
+}
+.icon-enter:before {
+  content: "\E925";
+}
+.icon-alt:before {
+  content: "\E926";
+}
+.icon-cog:before {
+  content: "\E994";
+}
+.print-canvas {
+  display: none;
+}
