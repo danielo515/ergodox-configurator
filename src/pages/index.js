@@ -42,6 +42,7 @@ export class KeyboardPage extends Component {
       editingId,
       exportIsOpen,
       closeExport,
+      importLayout,
       exported,
       setKey
     } = this.props;

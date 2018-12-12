@@ -110,11 +110,11 @@ describe("Layout translate", () => {
       { category: "digit", jsCode: "Digit2", label: "2" }
     ];
     const layout = [[1, 0, 1], [0, 1]];
-    const expected = [
-      { category: "spacing", jsCode: "Escape", label: "Esc", id: 0 },
-      { category: "digit", jsCode: "Digit1", label: "1", id: 2 },
-      { category: "digit", jsCode: "Digit2", label: "2", id: 4 }
-    ];
+    const expected = {
+      0: { category: "spacing", jsCode: "Escape", label: "Esc", id: 0 },
+      2: { category: "digit", jsCode: "Digit1", label: "1", id: 2 },
+      4: { category: "digit", jsCode: "Digit2", label: "2", id: 4 }
+    };
     const actual = keysToLayout(layout)(keys);
     expect(actual).toEqual(expected);
   });

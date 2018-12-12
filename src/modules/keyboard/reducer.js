@@ -1,10 +1,12 @@
 import { keyCodes } from "./keyDefinitions";
+import { parseLayout, keysToLayout } from "./parseLayout";
 
 const prefix = "[keyboard]";
 export const EDIT_KEY = `${prefix} EDIT_KEY`;
 export const EXPORT_LAYOUT = `${prefix} EXPORT_LAYOUT`;
 export const EXPORT_CLOSE = `${prefix} EXPORT_CLOSE`;
 export const SET_KEY = `${prefix} SET_KEY`;
+export const IMPORT = `${prefix} IMPORT`;
 
 const editKey = payload => ({
   type: EDIT_KEY,
@@ -23,9 +25,15 @@ const closeExport = _ => ({
   type: EXPORT_CLOSE
 });
 
+const importLayout = str => ({
+  type: IMPORT,
+  payload: str
+});
+
 export const actions = {
   editKey,
   exportLayout,
+  importLayout,
   closeExport,
   setKey
 };
@@ -123,6 +131,13 @@ export default (state = initialState, { type, payload = {} }) => {
       return {
         ...state,
         exportIsOpen: false
+      };
+    case IMPORT:
+      return {
+        ...state,
+        keys: keysToLayout(state.layout.description)(
+          parseLayout(keyCodes)(payload)
+        )
       };
 
     default:

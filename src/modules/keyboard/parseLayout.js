@@ -12,25 +12,28 @@ export const identifyKey = keyCodes => rawCode => {
   return {
     category: "custom",
     ...key, // category must ve overridable by key
+    label: typeof key.label === "string" ? key.label : rawCode, // TODO: generate the proper label
     value: rawCode, // just let it be
     ...(params && { params })
   };
 };
 
-const reduceSkipping = toSkip => fn => arr => {
+const reduceSkipping = toSkip => fn => init => arr => {
   let offset = 0;
+  console.log(arr);
   return arr.reduce((acc, val, idx) => {
-    val !== toSkip ? acc.push(fn(val, idx, offset)) : offset++;
+    val !== toSkip ? fn(acc, val, idx, offset) : offset++;
     return acc;
-  }, []);
+  }, init);
 };
 
 const flatten = arr => arr.reduce((a, b) => a.concat(b), []);
 
 export const keysToLayout = layout => keys => {
-  return reduceSkipping(0)((keyType, idx, offset) => {
-    return { ...keys[idx - offset], id: idx };
-  })(flatten(layout));
+  return reduceSkipping(0)((acc, _, idx, offset) => {
+    acc[idx] = { ...keys[idx - offset], id: idx };
+    return acc;
+  })({})(flatten(layout));
 };
 
 export const parseLayout = keyCodes => layoutStr =>
