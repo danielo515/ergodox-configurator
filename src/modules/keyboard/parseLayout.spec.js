@@ -1,8 +1,9 @@
-import { keyCodes } from "./keyDefinitions.js";
+import { keyCodes, selectKeyOptions } from "./keyDefinitions.js";
 import {
   splitEntries,
   parseLayout,
   identifyKey,
+  keysToLayout,
   parseCode
 } from "./parseLayout.js";
 
@@ -72,12 +73,13 @@ describe("Keyboard parsing", () => {
 
   it("Should turn a simple layout string into an array of keyCodes", () => {
     const actual = parseLayout(keyCodes)(simpleLayout);
+    const makeExpectedKey = code => ({ ...keyCodes[code], value: code });
     const expected = [
-      keyCodes["KC_LEFT"],
-      keyCodes["KC_DOWN"],
-      keyCodes["KC_RIGHT"],
-      keyCodes["KC_TRANSPARENT"],
-      keyCodes["KC_TRANSPARENT"]
+      makeExpectedKey("KC_LEFT"),
+      makeExpectedKey("KC_DOWN"),
+      makeExpectedKey("KC_RIGHT"),
+      makeExpectedKey("KC_TRANSPARENT"),
+      makeExpectedKey("KC_TRANSPARENT")
     ];
     expect(actual).toEqual(expected);
   });
@@ -96,6 +98,24 @@ describe("Keyboard parsing", () => {
       keyCodes["TO"],
       keyCodes["LCTL"]
     ];
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe("Layout translate", () => {
+  it("It should assign index to keys based on layout", () => {
+    const keys = [
+      { category: "spacing", jsCode: "Escape", label: "Esc" },
+      { category: "digit", jsCode: "Digit1", label: "1" },
+      { category: "digit", jsCode: "Digit2", label: "2" }
+    ];
+    const layout = [[1, 0, 1], [0, 1]];
+    const expected = [
+      { category: "spacing", jsCode: "Escape", label: "Esc", id: 0 },
+      { category: "digit", jsCode: "Digit1", label: "1", id: 2 },
+      { category: "digit", jsCode: "Digit2", label: "2", id: 4 }
+    ];
+    const actual = keysToLayout(layout)(keys);
     expect(actual).toEqual(expected);
   });
 });
