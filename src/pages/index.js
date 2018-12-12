@@ -17,15 +17,20 @@ import {
   selectModifierOptions,
   keyCodes
 } from "../modules/keyboard/keyDefinitions";
+import { actions as uiActions } from "../modules/ui";
+import ImportDialog from "../components/ImportDialog";
 
 const EditForm = editKey(keyCodes);
 
 const mapStateToProps = state => ({
-  ...state.keyboard
+  ...state.keyboard,
+  ...state.ui
 });
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(keyboardActions, dispatch);
+const mapDispatchToProps = dispatch => ({
+  ...bindActionCreators(keyboardActions, dispatch),
+  ui: bindActionCreators(uiActions, dispatch)
+});
 
 export class KeyboardPage extends Component {
   static propTypes = {
@@ -44,6 +49,8 @@ export class KeyboardPage extends Component {
       closeExport,
       importLayout,
       exported,
+      importDialogOpen,
+      ui,
       setKey
     } = this.props;
     return (
@@ -59,7 +66,12 @@ export class KeyboardPage extends Component {
         <Layout
           top={<Tabs />}
           bottom={
-            <Actions actions={[{ method: exportLayout, label: "Export" }]} />
+            <Actions
+              actions={[
+                { method: exportLayout, label: "Export" },
+                { method: ui.openImport, label: "Import" }
+              ]}
+            />
           }
         >
           <Keyboard
@@ -77,6 +89,11 @@ export class KeyboardPage extends Component {
           modifierOptions={selectModifierOptions}
         />
         <ExportDialog open={exportIsOpen} close={closeExport} text={exported} />
+        <ImportDialog
+          open={importDialogOpen}
+          onClose={ui.closeImport}
+          onSubmit={importLayout}
+        />
       </Fragment>
     );
   }
