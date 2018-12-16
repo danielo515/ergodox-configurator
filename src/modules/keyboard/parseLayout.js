@@ -1,5 +1,6 @@
+export const splitKeysRegex = /,\s*(?![^()]*\))/;
 // given an string representing an array of keycodes returns an array of each entry which can be a single keycode like KC_A or a composite one TD(copy)
-export const splitEntries = str => str.split(/,\s*(?![^()]*\))/);
+export const splitEntries = str => str.split(splitKeysRegex);
 // given a simple modifier key eg TO(1) it returns an object with code eg TD and params eg 1
 export const parseCode = rawCode => {
   const [, code, params] = /([A-Z_0-9]+)(?:\(([^\(\)]*)\))?/.exec(rawCode);
@@ -13,7 +14,7 @@ export const identifyKey = keyCodes => rawCode => {
     category: "custom",
     ...key, // category must ve overridable by key
     label: typeof key.label === "string" ? key.label : rawCode, // TODO: generate the proper label
-    value: rawCode, // just let it be
+    value: rawCode.trim(), // just let it be
     ...(params && { params })
   };
 };
