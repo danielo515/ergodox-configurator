@@ -71,6 +71,7 @@ class Import extends PureComponent {
           fullWidth
           margin="normal"
           variant="outlined"
+          autoFocus
           value={text}
           onChange={this.onChange}
         />
