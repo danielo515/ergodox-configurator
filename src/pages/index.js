@@ -46,7 +46,7 @@ export class KeyboardPage extends Component {
       editing,
       editingId,
       exportIsOpen,
-      closeExport,
+      exportClose,
       importLayout,
       exported,
       importDialogOpen,
@@ -88,7 +88,7 @@ export class KeyboardPage extends Component {
           keyOptions={selectKeyOptions}
           modifierOptions={selectModifierOptions}
         />
-        <ExportDialog open={exportIsOpen} close={closeExport} text={exported} />
+        <ExportDialog open={exportIsOpen} close={exportClose} text={exported} />
         <ImportDialog
           open={importDialogOpen}
           onClose={ui.closeImport}
