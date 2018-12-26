@@ -4,10 +4,14 @@ const twoToOneDimension = rowLen => (col, row) => col + row * rowLen;
  * @function getOr
  * @param  {Array/Object} src    The object or array you want to extract props from
  * @param  {any} defVal the default value to use in case of getting an undefined
+ * @param  {Function} predicate an extra validation step that decides if the found value is valid or not
  * @param  {String/Number} idx the index to extract
  * @return {any} the value at idx or the default value
  */
-const getOr = (src, defVal) => idx => src[idx] || defVal;
+const getOr = (src, defVal, predicate = () => true) => idx => {
+  const val = src[idx];
+  return val && predicate(val) ? val : defVal;
+};
 /*
 ( a -> m ) -> [a] -> m
  takes a function and uses it to reduce an array.
@@ -30,7 +34,7 @@ const map = fn => arr => (arr || []).map(fn);
  */
 export const generateLayout = (layoutDescription, keysData) => {
   const translate = twoToOneDimension(layoutDescription[0].length);
-  const getKey = getOr(keysData, { value: "KC_TRANSPARENT" });
+  const getKey = getOr(keysData, { value: "KC_TRANSPARENT" }, x => x.value);
   let longestKc = 0; // wee need to register the longest key code in order to align them later
   // Using flatMap is key because it skips falsy values
   const compiledLayout = flatMap((row, rowIdx) =>
