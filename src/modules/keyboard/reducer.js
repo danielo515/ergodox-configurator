@@ -2,34 +2,12 @@ import { keyCodes } from "./keyDefinitions";
 import { parseLayout, keysToLayout } from "./parseLayout";
 import { generateLayout } from "./exportLayout";
 import dryRedux from "../redux-dry";
-
-const layoutDescription = [
-  // Left hand
-  [1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 2],
-  [1, 1, 1, 1, 1, 1, 0],
-  [1, 1, 1, 1, 1, 1, 2],
-  [0, 1, 1, 1, 1, 1, 0],
-  [0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 1, 1],
-  [0, 0, 0, 0, 0, 0, 1],
-  [0, 0, 0, 0, 3, 3, 1],
-  // Right hand
-  [1, 1, 1, 1, 1, 1, 1],
-  [2, 1, 1, 1, 1, 1, 1],
-  [0, 1, 1, 1, 1, 1, 1],
-  [2, 1, 1, 1, 1, 1, 1],
-  [0, 1, 1, 1, 1, 1, 0],
-  [0, 0, 0, 0, 0, 0, 0],
-  [1, 1, 0, 0, 0, 0, 0],
-  [1, 0, 0, 0, 0, 0, 0],
-  [1, 3, 3, 0, 0, 0, 0]
-];
+import { ergodox } from "./layoutDescription";
 
 const layout = {
-  description: layoutDescription,
+  description: ergodox,
   split: true,
-  rowLn: layoutDescription[0].length
+  rowLn: ergodox[0].length
 };
 
 const initialState = {
