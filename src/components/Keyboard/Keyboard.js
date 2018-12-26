@@ -46,7 +46,6 @@ const makeRow = onClick => keysData => height => width => (
 };
 
 // generate rows with
-// JSON.stringify("x12345x".split("").map(label =>({label, verticalSpan: 1}))).replace('"label"','label').slice(1,-1)
 const Keyboard = ({ onKeySelect, layout, split, keysData }) => {
   const rows = layout.length;
   const rowsPerSide = rows / 2; // Just in case of split keyboard

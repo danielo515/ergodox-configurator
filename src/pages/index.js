@@ -21,10 +21,19 @@ import { actions as uiActions } from "../modules/ui";
 import ImportDialog from "../components/ImportDialog";
 
 const EditForm = editKey(keyCodes);
+/**
+ * creates an array formatted for the tabs component
+ */
+const makeTabs = (tabsCount, acc = []) =>
+  tabsCount
+    ? makeTabs(tabsCount - 1, acc.concat({ label: "Layer " + (tabsCount - 1) }))
+    : acc.reverse();
 
 const mapStateToProps = state => ({
   ...state.keyboard,
-  ...state.ui
+  ...state.ui,
+  keys: state.keyboard.keys[state.keyboard.activeLayer],
+  tabs: makeTabs(state.keyboard.layersCount)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -49,6 +58,10 @@ export class KeyboardPage extends Component {
       exportClose,
       importLayout,
       exported,
+      tabs,
+      activeLayer,
+      selectLayer,
+      createLayer,
       importDialogOpen,
       ui,
       setKey
@@ -64,7 +77,14 @@ export class KeyboardPage extends Component {
           <html lang="en" />
         </Helmet>
         <Layout
-          top={<Tabs />}
+          top={
+            <Tabs
+              tabs={tabs}
+              current={activeLayer}
+              onChange={selectLayer}
+              onAdd={createLayer}
+            />
+          }
           bottom={
             <Actions
               actions={[
