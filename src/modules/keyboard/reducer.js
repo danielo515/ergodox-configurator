@@ -61,9 +61,12 @@ const { actionCreators: actions, reducer } = dryRedux(
     }),
     IMPORT_LAYOUT: (state, { payload }) => ({
       ...state,
-      keys: keysToLayout(state.layout.description)(
-        parseLayout(keyCodes)(payload)
-      )
+      keys: {
+        ...state.keys,
+        [state.activeLayer]: keysToLayout(state.layout.description)(
+          parseLayout(keyCodes)(payload)
+        )
+      }
     })
   }
 );
