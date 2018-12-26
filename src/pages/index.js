@@ -24,10 +24,11 @@ const EditForm = editKey(keyCodes);
 /**
  * creates an array formatted for the tabs component
  */
-const makeTabs = (tabsCount, acc = []) =>
-  tabsCount
-    ? makeTabs(tabsCount - 1, acc.concat({ label: "Layer " + (tabsCount - 1) }))
-    : acc.reverse();
+const makeTabs = tabsCount => {
+  const tabs = [];
+  while (tabsCount--) tabs.push({ label: "Layer " + tabsCount });
+  return tabs.reverse();
+};
 
 const mapStateToProps = state => ({
   ...state.keyboard,
