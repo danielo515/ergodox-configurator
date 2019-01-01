@@ -1,9 +1,11 @@
 import { createStore as createReduxStore } from "redux";
 import keyboard from "./keyboard/reducer";
+import ui from "./ui";
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
-  keyboard
+  keyboard,
+  ui
 });
 
 export const createStore = () => {

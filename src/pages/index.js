@@ -7,24 +7,40 @@ import Helmet from "react-helmet";
 import Keyboard from "../components/Keyboard";
 import Actions from "../components/Keyboard/Actions";
 import Layout from "../components/Keyboard/Layout";
-import EditForm from "../components/EditForm";
+import editKey from "../components/EditForm";
 import ExportDialog from "../components/ExportDialog";
 import Tabs from "../components/Tabs";
 
 import { actions as keyboardActions } from "../modules/keyboard/reducer";
-import { selectKeyOptions } from "../modules/keyboard/keyDefinitions";
+import {
+  selectKeyOptions,
+  selectModifierOptions,
+  keyCodes
+} from "../modules/keyboard/keyDefinitions";
+import { actions as uiActions } from "../modules/ui";
+import ImportDialog from "../components/ImportDialog";
 
-// if (process.env.NODE_ENV !== "production") {
-//   const { whyDidYouUpdate } = require("why-did-you-update");
-//   whyDidYouUpdate(React);
-// }
+const EditForm = editKey(keyCodes);
+/**
+ * creates an array formatted for the tabs component
+ */
+const makeTabs = tabsCount => {
+  const tabs = [];
+  while (tabsCount--) tabs.push({ label: "Layer " + tabsCount });
+  return tabs.reverse();
+};
 
 const mapStateToProps = state => ({
-  ...state.keyboard
+  ...state.keyboard,
+  ...state.ui,
+  keys: state.keyboard.keys[state.keyboard.activeLayer],
+  tabs: makeTabs(state.keyboard.layersCount)
 });
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(keyboardActions, dispatch);
+const mapDispatchToProps = dispatch => ({
+  ...bindActionCreators(keyboardActions, dispatch),
+  ui: bindActionCreators(uiActions, dispatch)
+});
 
 export class KeyboardPage extends Component {
   static propTypes = {
@@ -40,8 +56,15 @@ export class KeyboardPage extends Component {
       editing,
       editingId,
       exportIsOpen,
-      closeExport,
+      exportClose,
+      importLayout,
       exported,
+      tabs,
+      activeLayer,
+      selectLayer,
+      createLayer,
+      importDialogOpen,
+      ui,
       setKey
     } = this.props;
     return (
@@ -50,12 +73,26 @@ export class KeyboardPage extends Component {
           {/* General tags */}
           <title>Ergodox layout editor</title>
           <meta name="description" content="Configure your ergodox layouts" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+
           <html lang="en" />
         </Helmet>
         <Layout
-          top={<Tabs />}
+          top={
+            <Tabs
+              tabs={tabs}
+              current={activeLayer}
+              onChange={selectLayer}
+              onAdd={createLayer}
+            />
+          }
           bottom={
-            <Actions actions={[{ method: exportLayout, label: "Export" }]} />
+            <Actions
+              actions={[
+                { method: exportLayout, label: "Export" },
+                { method: ui.openImport, label: "Import" }
+              ]}
+            />
           }
         >
           <Keyboard
@@ -70,8 +107,14 @@ export class KeyboardPage extends Component {
           onClose={setKey}
           info={{ id: editingId }}
           keyOptions={selectKeyOptions}
+          modifierOptions={selectModifierOptions}
         />
-        <ExportDialog open={exportIsOpen} close={closeExport} text={exported} />
+        <ExportDialog open={exportIsOpen} close={exportClose} text={exported} />
+        <ImportDialog
+          open={importDialogOpen}
+          onClose={ui.closeImport}
+          onSubmit={importLayout}
+        />
       </Fragment>
     );
   }

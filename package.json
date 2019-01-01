@@ -5,6 +5,8 @@
   "scripts": {
     "develop": "gatsby develop",
     "start": "npm run develop",
+    "test": "jest",
+    "testw": "jest --watch",
     "build-prod": "gatsby build --prefix-paths",
     "build": "gatsby build",
     "serve": "gatsby serve",
@@ -23,6 +25,7 @@
     "gatsby-plugin-offline": "^2.0.19",
     "gatsby-plugin-react-helmet": "^3.0.4",
     "gatsby-plugin-styled-components": "^3.0.4",
+    "gatsby-plugin-typescript": "^2.0.3",
     "gatsby-plugin-webpack-bundle-analyzer": "^1.0.3",
     "gh-pages": "^2.0.1",
     "normalize.css": "^8.0.1",
@@ -37,6 +40,16 @@
     "styled-components": "^4.1.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "@types/jest": "^23.3.10",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "babel-preset-gatsby": "^0.1.6",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^23.6.0",
+    "react-test-renderer": "^16.6.3",
+    "ts-jest": "^23.10.5",
+    "typescript": "^3.2.2",
     "why-did-you-update": "^1.0.6"
   }
 }

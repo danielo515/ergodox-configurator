@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
+import Label from "./Label";
 
 const Base = styled.div`
   position: absolute;
@@ -10,22 +11,6 @@ const Base = styled.div`
   text-align: center;
   background-color: rgb(244, 244, 244);
   border-radius: 8px;
-`;
-
-const fontSize = css`
-  ${({ label }) => {
-    if (label.length === 1) return "125%";
-    if (label.length > 5) return "65%";
-    return "85%";
-  }};
-`;
-
-const LabelEntry = styled.div`
-  font-size: ${fontSize};
-  word-break: break-word;
-  &:nth-child(2) {
-    margin-top: 2px;
-  }
 `;
 
 const Cap = styled.div`
@@ -60,10 +45,11 @@ function Key({
     left: `${width * column}%`,
     top: `${height * (row - lift)}%`
   };
+  const labels = Array.isArray(label) ? label : [label];
   return (
     <Base {...{ style }}>
       <Cap onClick={_ => onClick({ id })}>
-        <LabelEntry label={label}>{label}</LabelEntry>
+        {label && <Label labels={labels} />}
       </Cap>
     </Base>
   );

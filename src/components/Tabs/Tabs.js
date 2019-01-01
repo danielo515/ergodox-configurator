@@ -36,53 +36,54 @@ const styles = theme => ({
   }
 });
 
-class ScrollableTabsButtonAuto extends React.Component {
-  state = {
-    value: 0,
-    tabs: [{ label: "Layer One" }, { label: "Layer two" }]
-  };
+const handleChange = cb => (event, value) => {
+  cb(value);
+};
 
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
+function ScrollableTabs(props) {
+  const { current, tabs, classes, onChange, onAdd } = props;
 
-  render() {
-    const { classes } = this.props;
-    const { value, tabs } = this.state;
-
-    return (
-      <div className={classes.root}>
-        <AppBar
-          position="static"
-          color="default"
-          classes={{ root: classes.header }}
+  return (
+    <div className={classes.root}>
+      <AppBar
+        position="static"
+        color="default"
+        classes={{ root: classes.header }}
+      >
+        <Tabs
+          value={current}
+          onChange={handleChange(onChange)}
+          classes={{ root: classes.tabs }}
+          indicatorColor="primary"
+          textColor="primary"
+          scrollable
+          scrollButtons="auto"
         >
-          <Tabs
-            value={value}
-            onChange={this.handleChange}
-            classes={{ root: classes.tabs }}
-            indicatorColor="primary"
-            textColor="primary"
-            scrollable
-            scrollButtons="auto"
-          >
-            {tabs.map((tab, idx) => (
-              <Tab label={tab.label} key={idx} />
-            ))}
-          </Tabs>
-          <IconButton
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="Menu"
-          >
-            <AddIcon />
-          </IconButton>
-        </AppBar>
-      </div>
-    );
-  }
+          {tabs.map((tab, idx) => (
+            <Tab label={tab.label} key={idx} />
+          ))}
+        </Tabs>
+        <IconButton
+          className={classes.menuButton}
+          color="inherit"
+          aria-label="Menu"
+          onClick={onAdd}
+        >
+          <AddIcon />
+        </IconButton>
+      </AppBar>
+    </div>
+  );
 }
 
-ScrollableTabsButtonAuto.propTypes = {};
+ScrollableTabs.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  current: PropTypes.number.isRequired,
+  onAdd: PropTypes.func
+};
 
-export default withStyles(styles)(ScrollableTabsButtonAuto);
+ScrollableTabs.defaultProps = {
+  tabs: []
+};
+
+export default withStyles(styles)(ScrollableTabs);
