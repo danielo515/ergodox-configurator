@@ -10,7 +10,7 @@
     "build-prod": "gatsby build --prefix-paths",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "clean": "rm -rf .cache public",
+    "clean": "rm -rf .cache public node_modules/.cache",
     "pages": "gh-pages -d public",
     "deploy": "npm run build-prod && npm run pages"
   },
@@ -37,6 +37,7 @@
     "react-redux": "^5.1.1",
     "react-select": "^2.1.2",
     "redux": "^4.0.1",
+    "redux-persist": "^5.10.0",
     "styled-components": "^4.1.2"
   },
   "devDependencies": {
