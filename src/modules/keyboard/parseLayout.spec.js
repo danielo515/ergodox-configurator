@@ -98,7 +98,6 @@ describe("Keyboard parsing", () => {
       { ...keyCodes["KC_W"], value: "KC_W" },
       { ...keyCodes["KC_E"], value: "KC_E" },
       {
-        ...keyCodes["TD"],
         category: "custom",
         label: "TD(COPY_CUT)",
         params: "COPY_CUT",

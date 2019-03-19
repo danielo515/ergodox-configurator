@@ -4,7 +4,7 @@ export const splitKeysRegex = /,\s*(?![^()]*\))/;
  *  Regex to find the keycodes inside of a keycode array like this:
  * [2] = LAYOUT_ergodox(KC_ESCAPE,KC_F1,KC_F2,KC_F3,KC_F4,KC_F5)
  **/
-const fullLayoutRegex = /(?:\[[0-9]+\]\s*=\s*[^(]*\()?([\w\d\n\s\t,()]*)\),/;
+const fullLayoutRegex = /(?:\[[0-9]+\]\s*=\s*[^(]*\()([\w\d\n\s\t,()]*)\),/;
 // given an string representing an array of keycodes returns an array of each entry which can be a single keycode like KC_A or a composite one TD(copy)
 export const splitEntries = str => str.split(splitKeysRegex);
 // given a simple modifier key eg TO(1) it returns an object with code eg TD and params eg 1
